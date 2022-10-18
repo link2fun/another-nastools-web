@@ -1,13 +1,8 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
-import { useIntl } from '@umijs/max';
 
 const Footer: React.FC = () => {
-  const intl = useIntl();
-  const defaultMessage = intl.formatMessage({
-    id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
-  });
+  const defaultMessage = 'Support by NasTools';
 
   const currentYear = new Date().getFullYear();
 
@@ -19,23 +14,18 @@ const Footer: React.FC = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'jxxghp/nas-tools',
+          title: <><GithubOutlined /> jxxghp/nas-tools</>,
+          href: 'https://github.com/jxxghp/nas-tools',
           blankTarget: true,
         },
         {
           key: 'github',
-          title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          title: <><GithubOutlined /> link2fun/another-nastools-web</>,
+          href: 'https://github.com/link2fun/another-nastools-web',
           blankTarget: true,
         },
-        {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
-          blankTarget: true,
-        },
+
       ]}
     />
   );

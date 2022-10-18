@@ -138,7 +138,7 @@ export default {
       access = 'user';
       return;
     }
-    if (type === 'mobile') {
+    if (type === 'api_key') {
       res.send({
         status: 'ok',
         type,
