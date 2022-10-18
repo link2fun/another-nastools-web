@@ -2,7 +2,7 @@ import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 
 const Footer: React.FC = () => {
-  const defaultMessage = 'Support by NasTools';
+  const defaultMessage = 'Support by NasTool';
 
   const currentYear = new Date().getFullYear();
 

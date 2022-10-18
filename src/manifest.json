@@ -1,6 +1,6 @@
 {
-  "name": "NasTools",
-  "short_name": "NasTools",
+  "name": "NasTool",
+  "short_name": "NasTool",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",

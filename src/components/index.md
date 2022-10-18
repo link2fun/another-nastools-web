@@ -66,7 +66,7 @@ export default () => {
       placeholder="站内搜索"
       defaultValue="umi ui"
       options={[
-        { label: 'NasTools', value: 'NasTools' },
+        { label: 'NasTool', value: 'NasTool' },
         {
           label: 'Ant Design',
           value: 'Ant Design',
@@ -206,7 +206,7 @@ export default () => {
 ### NoticeIconData
 
 ```tsx | pure
-export type NoticeIconData {
+export type NoticeIconData = {
   id: string;
   key: string;
   avatar: string;

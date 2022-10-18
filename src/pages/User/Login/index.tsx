@@ -74,7 +74,7 @@ const Login: React.FC = () => {
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src="/logo.png" />}
-          title="NasTools"
+          title="NasTool"
           subTitle={"NAS媒体库资源归集、整理自动化工具"}
           initialValues={{
             autoLogin: true,

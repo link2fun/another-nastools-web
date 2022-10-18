@@ -105,7 +105,7 @@ const Welcome: React.FC = () => {
               color: '#1A1A1A',
             }}
           >
-            欢迎使用 NasTools
+            欢迎使用 NasTool
           </div>
           <p
             style={{
