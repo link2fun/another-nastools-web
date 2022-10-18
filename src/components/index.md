@@ -66,7 +66,7 @@ export default () => {
       placeholder="站内搜索"
       defaultValue="umi ui"
       options={[
-        { label: 'Ant Design Pro', value: 'Ant Design Pro' },
+        { label: 'NasTools', value: 'NasTools' },
         {
           label: 'Ant Design',
           value: 'Ant Design',
