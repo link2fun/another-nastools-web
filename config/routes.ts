@@ -31,7 +31,7 @@ export default [
     path: '/resource_search',
     name: '资源搜索',
     icon: 'SearchOutlined',
-    component: './Blank/Blank',
+    component: './ResourceSearch/ResourceSearchIndex',
   },
   // 推荐
   {
