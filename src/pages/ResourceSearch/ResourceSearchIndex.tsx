@@ -24,7 +24,7 @@ const ResourceSearchIndex = () => {
         {
           dataSource.map((item, index) => {
             return (
-              <Col xs={20} sm={16} md={12} lg={8} xl={6}>
+              <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                 <Card
                   key={index}
                   cover={
