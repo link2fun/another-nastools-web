@@ -4,6 +4,8 @@ import IconWorldDownload from '@/components/Icons/IconWorldDownload';
 import IconArrowBigUpLines from '@/components/Icons/IconArrowBigUpLines';
 import IconCloudUpload from '@/components/Icons/IconCloudUpload';
 import TrafficPieChart from '@/pages/Site/SiteData/components/TrafficPieChart';
+import TrafficHistoryColumnChart from '@/pages/Site/SiteData/components/TrafficHistoryColumnChart';
+import SiteDataTable from '@/pages/Site/SiteData/components/SiteDataTable';
 
 const SiteDataIndex = () => {
   return (
@@ -85,10 +87,18 @@ const SiteDataIndex = () => {
       </Row>
       <Row gutter={[16, 32]} className={'mt-4'}>
         <Col span={24}>
-          <Card title={'历史数据 (上传量 9.6 TiB / 下载量 89.5 GiB)'}></Card>
+          <Card title={'历史数据 (上传量 9.6 TiB / 下载量 89.5 GiB)'}>
+            <TrafficHistoryColumnChart />
+          </Card>
         </Col>
       </Row>
-      <div>站点数据</div>
+      <Row className={'mt-4'}>
+        <Col span={24}>
+          <Card title={'站点数据'}>
+            <SiteDataTable />
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };
