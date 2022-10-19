@@ -1,57 +1,11 @@
 import { Card, Col, Row } from 'antd';
-import { Pie } from '@ant-design/plots';
 import IconWorldUpload from '@/components/Icons/IconWorldUpload';
 import IconWorldDownload from '@/components/Icons/IconWorldDownload';
 import IconArrowBigUpLines from '@/components/Icons/IconArrowBigUpLines';
 import IconCloudUpload from '@/components/Icons/IconCloudUpload';
+import TrafficPieChart from '@/pages/Site/SiteData/components/TrafficPieChart';
 
 const SiteDataIndex = () => {
-  const data = [
-    {
-      type: '分类一',
-      value: 27,
-    },
-    {
-      type: '分类二',
-      value: 25,
-    },
-    {
-      type: '分类三',
-      value: 18,
-    },
-    {
-      type: '分类四',
-      value: 15,
-    },
-    {
-      type: '分类五',
-      value: 10,
-    },
-    {
-      type: '其他',
-      value: 5,
-    },
-  ];
-  const config = {
-    appendPadding: 10,
-    data,
-    angleField: 'value',
-    colorField: 'type',
-    radius: 0.8,
-    label: {
-      type: 'outer',
-      content: '{name} {percentage}',
-    },
-    interactions: [
-      {
-        type: 'pie-legend-active',
-      },
-      {
-        type: 'element-active',
-      },
-    ],
-  };
-
   return (
     <div className={'bg-[#f5f7fb] p-4'}>
       <div className={'py-4 font-bold text-2xl'}>数据统计</div>
@@ -120,12 +74,12 @@ const SiteDataIndex = () => {
       <Row gutter={[16, 32]} className={'mt-4'}>
         <Col span={24} lg={12}>
           <Card title={'今日上传 1.5 TiB'} className={'rounded'}>
-            <Pie {...config} />
+            <TrafficPieChart />
           </Card>
         </Col>
         <Col span={24} lg={12}>
           <Card title={'今日下载 696.3 MiB'}>
-            <Pie {...config} />
+            <TrafficPieChart />
           </Card>
         </Col>
       </Row>
