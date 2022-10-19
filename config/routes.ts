@@ -76,7 +76,7 @@ export default [
       {
         path: '/site/data',
         name: '数据统计',
-        component: './Blank/Blank',
+        component: './Site/SiteData/SiteDataIndex',
       },
       {
         path: '/site/rush_mission',
