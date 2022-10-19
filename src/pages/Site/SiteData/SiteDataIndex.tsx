@@ -1,6 +1,57 @@
-import { Col, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
+import { Pie } from '@ant-design/plots';
+import IconWorldUpload from '@/components/Icons/IconWorldUpload';
+import IconWorldDownload from '@/components/Icons/IconWorldDownload';
+import IconArrowBigUpLines from '@/components/Icons/IconArrowBigUpLines';
+import IconCloudUpload from '@/components/Icons/IconCloudUpload';
 
 const SiteDataIndex = () => {
+  const data = [
+    {
+      type: '分类一',
+      value: 27,
+    },
+    {
+      type: '分类二',
+      value: 25,
+    },
+    {
+      type: '分类三',
+      value: 18,
+    },
+    {
+      type: '分类四',
+      value: 15,
+    },
+    {
+      type: '分类五',
+      value: 10,
+    },
+    {
+      type: '其他',
+      value: 5,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: 'value',
+    colorField: 'type',
+    radius: 0.8,
+    label: {
+      type: 'outer',
+      content: '{name} {percentage}',
+    },
+    interactions: [
+      {
+        type: 'pie-legend-active',
+      },
+      {
+        type: 'element-active',
+      },
+    ],
+  };
+
   return (
     <div className={'bg-[#f5f7fb] p-4'}>
       <div className={'py-4 font-bold text-2xl'}>数据统计</div>
@@ -12,27 +63,7 @@ const SiteDataIndex = () => {
             }
           >
             <div className={'mr-2 p-1 align-middle'}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white w-10 h-10 rounded bg-blue-500"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <desc>Download more icon variants from https://tabler-icons.io/i/world-upload</desc>
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M21 12a9 9 0 1 0 -9 9"></path>
-                <path d="M3.6 9h16.8"></path>
-                <path d="M3.6 15h8.4"></path>
-                <path d="M11.578 3a17 17 0 0 0 0 18"></path>
-                <path d="M12.5 3c1.719 2.755 2.5 5.876 2.5 9"></path>
-                <path d="M18 21v-7m3 3l-3 -3l-3 3"></path>
-              </svg>
+              <IconWorldUpload />
             </div>
             <div>
               <div className={'text-gray-500 font-bold'}>总上传量</div>
@@ -47,29 +78,7 @@ const SiteDataIndex = () => {
             }
           >
             <div className={'mr-2 p-1 align-middle'}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white font-normal w-10 h-10 rounded bg-red-500"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <desc>
-                  Download more icon variants from https://tabler-icons.io/i/world-download
-                </desc>
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M21 12a9 9 0 1 0 -9 9"></path>
-                <path d="M3.6 9h16.8"></path>
-                <path d="M3.6 15h8.4"></path>
-                <path d="M11.578 3a17 17 0 0 0 0 18"></path>
-                <path d="M12.5 3c1.719 2.755 2.5 5.876 2.5 9"></path>
-                <path d="M18 14v7m-3 -3l3 3l3 -3"></path>
-              </svg>
+              <IconWorldDownload />
             </div>
             <div>
               <div className={'text-gray-500 font-bold'}>总下载量</div>
@@ -84,23 +93,7 @@ const SiteDataIndex = () => {
             }
           >
             <div className={'mr-2 p-1 align-middle'}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="rounded bg-green-500  text-white"
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M9 12h-3.586a1 1 0 0 1 -.707 -1.707l6.586 -6.586a1 1 0 0 1 1.414 0l6.586 6.586a1 1 0 0 1 -.707 1.707h-3.586v3h-6v-3z"></path>
-                <path d="M9 21h6"></path>
-                <path d="M9 18h6"></path>
-              </svg>
+              <IconArrowBigUpLines />
             </div>
             <div>
               <div className={'text-gray-500 font-bold'}>总做种数</div>
@@ -115,23 +108,7 @@ const SiteDataIndex = () => {
             }
           >
             <div className={'mr-2 p-1 align-middle'}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className=" rounded bg-green-500 text-white"
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1"></path>
-                <polyline points="9 15 12 12 15 15"></polyline>
-                <line x1="12" y1="12" x2="12" y2="21"></line>
-              </svg>
+              <IconCloudUpload />
             </div>
             <div>
               <div className={'text-gray-500 font-bold'}>总上传量</div>
@@ -140,11 +117,23 @@ const SiteDataIndex = () => {
           </div>
         </Col>
       </Row>
-      <div>
-        <div>今日上传</div>
-        <div>今日下载</div>
-      </div>
-      <div>历史数据</div>
+      <Row gutter={[16, 32]} className={'mt-4'}>
+        <Col span={24} lg={12}>
+          <Card title={'今日上传 1.5 TiB'} className={'rounded'}>
+            <Pie {...config} />
+          </Card>
+        </Col>
+        <Col span={24} lg={12}>
+          <Card title={'今日下载 696.3 MiB'}>
+            <Pie {...config} />
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16, 32]} className={'mt-4'}>
+        <Col span={24}>
+          <Card title={'历史数据 (上传量 9.6 TiB / 下载量 89.5 GiB)'}></Card>
+        </Col>
+      </Row>
       <div>站点数据</div>
     </div>
   );
