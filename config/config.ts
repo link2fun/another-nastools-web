@@ -63,7 +63,7 @@ export default defineConfig({
    * @name 快速热更新配置
    * @description 一个不错的热更新组件，更新时可以保留 state
    */
-  fastRefresh: true,
+  fastRefresh: false,
   //============== 以下都是max的插件配置 ===============
   /**
    * @name 数据流插件

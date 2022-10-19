@@ -38,12 +38,11 @@ export default [
     path: '/recommend',
     name: '推荐',
     icon: 'HeartOutlined',
-    component: './Blank/Blank',
     routes: [
       {
         path: '/recommend/tmdb_hot_movie',
         name: 'TMDB热门电影',
-        component: './Blank/Blank',
+        component: './Recommend/RecommendIndex',
       },
       {
         path: '/recommend/tmdb_hot_tv',
@@ -60,7 +59,7 @@ export default [
         name: 'TMDB最新电视剧',
         component: './Blank/Blank',
       },
-    ]
+    ],
   },
 
   // - 站点管理
@@ -78,19 +77,19 @@ export default [
       {
         path: '/site/data',
         name: '数据统计',
-        component: './Blank/Blank'
+        component: './Blank/Blank',
       },
       {
         path: '/site/rush_mission',
         name: '刷流任务',
-        component: './Blank/Blank'
+        component: './Blank/Blank',
       },
       {
         path: '/site/site_resource',
         name: '站点资源',
-        component: './Blank/Blank'
+        component: './Blank/Blank',
       },
-    ]
+    ],
   },
 
   // - 订阅管理
@@ -108,7 +107,7 @@ export default [
       { path: '/subscribe/custom', name: '自定义订阅', component: './Blank/Blank' },
       // 订阅日历
       { path: '/subscribe/calendar', name: '订阅日历', component: './Blank/Blank' },
-    ]
+    ],
   },
   // 下载管理
   {
@@ -121,7 +120,7 @@ export default [
       { path: '/download/ing', name: '正在下载', component: './Blank/Blank' },
       // 近期下载
       { path: '/download/recent', name: '近期下载', component: './Blank/Blank' },
-    ]
+    ],
   },
   {
     // 媒体整理
@@ -136,7 +135,7 @@ export default [
       { path: '/media/history', name: '历史记录', component: './Blank/Blank' },
       // TMDB缓存
       { path: '/media/tmdb_cache', name: 'TMDB缓存', component: './Blank/Blank' },
-      ]
+    ],
   },
 
   // 服务
@@ -177,7 +176,7 @@ export default [
       { path: '/setting/subtitle', name: '字幕', component: './Blank/Blank' },
       // 豆瓣
       { path: '/setting/douban', name: '豆瓣', component: './Blank/Blank' },
-    ]
+    ],
   },
 
   {
