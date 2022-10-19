@@ -67,12 +67,11 @@ export default [
     path: '/site',
     name: '站点管理',
     icon: 'CloudServerOutlined',
-    component: './Blank/Blank',
     routes: [
       {
         path: '/site/maintain',
         name: '站点维护',
-        component: './Blank/Blank',
+        component: './Site/SiteMaintain/SiteMaintainIndex',
       },
       {
         path: '/site/data',
