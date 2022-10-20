@@ -81,7 +81,7 @@ export default [
       {
         path: '/site/rush_mission',
         name: '刷流任务',
-        component: './Blank/Blank',
+        component: './Site/SiteRushMission/SiteRushMissionIndex',
       },
       {
         path: '/site/site_resource',
