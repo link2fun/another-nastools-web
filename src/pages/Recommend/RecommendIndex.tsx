@@ -1,3 +1,6 @@
+import MediaInfoCard from '@/components/MediaInfoCard';
+import { Col, Row } from 'antd';
+
 const RecommendIndex = () => {
   const dataSource = [
     {
@@ -103,36 +106,23 @@ const RecommendIndex = () => {
   ];
 
   return (
-    <div>
+    <div className={'p-4'}>
       <div className={'font-bold text-2xl mb-2'}>正在热映</div>
 
-      <div className="recommend-list flex flex-wrap ">
+      <Row gutter={[16, 32]}>
         {dataSource.map((item, index) => {
           return (
-            <div
-              className="recommend-item sm:w-full md:w-1/2 lg:w-1/4  xl:w-1/5 2xl:1/6 p-2 "
-              key={index}
-            >
-              <div
-                className={'rounded-2xl relative border-inherit shadow pb-2 hover:-translate-y-1'}
-              >
-                <img className={'w-full rounded'} src={item.img} alt="" />
-                <div className="recommend-item-title font-bold text-center text-md">
-                  {item.title}
-                </div>
-                <div className="recommend-item-score absolute right-2 top-1 bg-purple-400 rounded-2xl px-2 text-white font-bold">
-                  {item.score}
-                </div>
-                <div className={'flex justify-between mx-2'}>
-                  <div>详情</div>
-                  <div>订阅</div>
-                  <div>搜索</div>
-                </div>
-              </div>
-            </div>
+            <Col span={24} xs={24} sm={12} md={8} lg={6} xl={4} xxl={4} key={index}>
+              <MediaInfoCard
+                mediaTitle={item.title}
+                mediaScore={item.score}
+                mediaImgUrl={item.img}
+                mediaType={'电影'}
+              />
+            </Col>
           );
         })}
-      </div>
+      </Row>
     </div>
   );
 };
