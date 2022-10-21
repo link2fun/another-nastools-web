@@ -1,11 +1,10 @@
 import MediaInfoCard from '@/components/MediaInfoCard';
-import { Col, Row } from 'antd';
 
 const RecommendIndex = () => {
   const dataSource = [
     {
       title: '孤儿怨：首杀',
-      score: '6.8',
+      score: '4',
       img: 'https://image.tmdb.org/t/p/original//a62ePavtFxPpDknc67mtAjUU2mZ.jpg',
     },
     {
@@ -109,20 +108,20 @@ const RecommendIndex = () => {
     <div className={'p-4'}>
       <div className={'font-bold text-2xl mb-2'}>正在热映</div>
 
-      <Row gutter={[16, 32]}>
+      <div className={'container px-2 py-4 mx-auto flex flex-wrap '}>
         {dataSource.map((item, index) => {
           return (
-            <Col span={24} xs={24} sm={12} md={8} lg={6} xl={4} xxl={4} key={index}>
+            <div className={'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6'} key={index}>
               <MediaInfoCard
-                mediaTitle={item.title}
+                mediaType={'电影'}
                 mediaScore={item.score}
                 mediaImgUrl={item.img}
-                mediaType={'电影'}
+                mediaTitle={item.title}
               />
-            </Col>
+            </div>
           );
         })}
-      </Row>
+      </div>
     </div>
   );
 };
