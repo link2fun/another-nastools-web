@@ -1,5 +1,6 @@
 import MediaInfoCard from '@/components/MediaInfoCard';
 import MediaInfoModal from '@/components/MediaInfoModal';
+import { useModel } from '@umijs/max';
 
 const RecommendIndex = () => {
   const dataSource = [
@@ -104,6 +105,9 @@ const RecommendIndex = () => {
       img: 'https://image.tmdb.org/t/p/original//6b7swg6DLqXCO3XUsMnv6RwDMW2.jpg',
     },
   ];
+
+  const { visible, mediaInfo, showMediaInfoModal, hideMediaInfoModal } = useModel('mediaInfoModal');
+
   return (
     <div className={'p-4'}>
       <div className={'font-bold text-2xl mb-2'}>正在热映</div>
@@ -111,7 +115,20 @@ const RecommendIndex = () => {
       <div className={'container px-2 py-4 mx-auto flex flex-wrap '}>
         {dataSource.map((item, index) => {
           return (
-            <div className={'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6'} key={index}>
+            <div
+              className={'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6'}
+              key={index}
+              onClick={() => {
+                showMediaInfoModal({
+                  title: item.title,
+                  type: '电影',
+                  releaseDate: '2022-10-22',
+                  mainImgUrl: item.img,
+                  tmdbId: '',
+                  doubanId: '',
+                });
+              }}
+            >
               <MediaInfoCard
                 mediaType={'电影'}
                 mediaScore={item.score}
@@ -122,7 +139,7 @@ const RecommendIndex = () => {
           );
         })}
       </div>
-      <MediaInfoModal />
+      <MediaInfoModal visible={visible} mediaInfo={mediaInfo} handleClose={hideMediaInfoModal} />
     </div>
   );
 };

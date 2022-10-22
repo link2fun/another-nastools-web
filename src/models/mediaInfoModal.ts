@@ -1,13 +1,15 @@
 // mediaInfoModal.ts
 import { useState, useCallback } from 'react';
 
-type MediaInfo = {
+export type MediaInfo = {
   /** 媒体名称 */
   title: string;
   /** 媒体类型: MOVIE, TV, ANIME */
   type: string;
   /** 上线/发布日期 */
   releaseDate: string;
+  overview: string;
+  mainImgUrl: string;
 
   /** TMDB ID */
   tmdbId: string;
@@ -17,7 +19,7 @@ type MediaInfo = {
 
 export default () => {
   /** 控制 Modal 是否显示 */
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const [mediaInfo, setMediaInfo] = useState<Partial<MediaInfo>>({
     title: '',
