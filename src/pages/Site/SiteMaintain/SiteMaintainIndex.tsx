@@ -1,6 +1,6 @@
-import { Card, Col, Row, Space, Tag } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import Meta from 'antd/es/card/Meta';
+import { Button, Col, Row } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import SiteInfoCard from '@/pages/Site/SiteMaintain/components/SiteInfoCard';
 
 const SiteMaintainIndex = () => {
   const dataSource = [];
@@ -17,42 +17,22 @@ const SiteMaintainIndex = () => {
   }
 
   return (
-    <div className="site-card-wrapper">
+    <div className="p-4">
+      <div className={'flex justify-between items-center my-3 '}>
+        <div className={'font-bold text-xl'}>站点维护</div>
+        <div>
+          <Button type={'primary'} icon={<PlusOutlined />}>
+            新增站点
+          </Button>
+        </div>
+      </div>
       <Row gutter={[16, 32]}>
         {dataSource.map((item, index) => {
           return (
             <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8} key={index}>
-              <Card
-                title={
-                  <div>
-                    <span className={'bg-gray-400 inline-block w-6 text-center rounded-full mr-3'}>
-                      {item.siteOrder}
-                    </span>
-                    <span>{item.siteName}</span>
-                  </div>
-                }
-                bordered={false}
-                extra={[
-                  <Space>
-                    <EditOutlined />
-                    <DeleteOutlined />
-                  </Space>,
-                ]}
-              >
-                <Meta
-                  title={<span>站点地址：{item.siteUrl}</span>}
-                  description={
-                    <>
-                      <Tag color={'blue'}>COOKIE</Tag>
-                      <Tag color={'green'}>RSS</Tag>
-                      <Tag color={'yellow'}>仿真</Tag>
-                      {item.siteTag.map((tag) => {
-                        return <Tag color={'orange'}>{tag}</Tag>;
-                      })}
-                    </>
-                  }
-                />
-              </Card>
+              <div className={'w-full'}>
+                <SiteInfoCard />
+              </div>
             </Col>
           );
         })}
