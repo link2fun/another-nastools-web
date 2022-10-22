@@ -12,15 +12,15 @@ const MediaInfoModal = () => {
       title={false}
       footer={false}
       closable={false}
-      // width={720}
-      className={'rounded-2xl'}
+      className={'rounded-2xl w-full md:w-full'}
+      width={720}
       style={{ borderRadius: '1rem' }}
       bodyStyle={{ padding: 0, backgroundColor: 'inherit' }}
     >
       <Badge.Ribbon text={'6.8'} color={'purple'}>
         <div className={'rounded-lg md:rounded-l-lg '}>
           <div className="flex justify-center">
-            <div className="flex flex-col md:flex-row md:max-w-xl bg-white shadow-lg">
+            <div className="flex flex-col md:flex-row md:max-w-3xl bg-white shadow-lg">
               <img
                 className="hidden md:block w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none "
                 src="https://image.tmdb.org/t/p/w500/brFiOc27fi9obISGfsdtkP9YtAi.jpg"
