@@ -1,4 +1,5 @@
 import MediaInfoCard from '@/components/MediaInfoCard';
+import MediaInfoModal from '@/components/MediaInfoModal';
 
 const RecommendIndex = () => {
   const dataSource = [
@@ -103,7 +104,6 @@ const RecommendIndex = () => {
       img: 'https://image.tmdb.org/t/p/original//6b7swg6DLqXCO3XUsMnv6RwDMW2.jpg',
     },
   ];
-
   return (
     <div className={'p-4'}>
       <div className={'font-bold text-2xl mb-2'}>正在热映</div>
@@ -122,6 +122,7 @@ const RecommendIndex = () => {
           );
         })}
       </div>
+      <MediaInfoModal />
     </div>
   );
 };
