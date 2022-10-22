@@ -1,4 +1,4 @@
-// mediaInfoModal.ts
+// media-info-modal.ts
 import { useState, useCallback } from 'react';
 
 export type MediaInfo = {

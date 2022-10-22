@@ -106,7 +106,8 @@ const RecommendIndex = () => {
     },
   ];
 
-  const { visible, mediaInfo, showMediaInfoModal, hideMediaInfoModal } = useModel('mediaInfoModal');
+  const { visible, mediaInfo, showMediaInfoModal, hideMediaInfoModal } =
+    useModel('media-info-modal');
 
   return (
     <div className={'p-4'}>

@@ -1,6 +1,8 @@
 import { Button, Col, Row } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import SiteInfoCard from '@/pages/Site/SiteMaintain/components/SiteInfoCard';
+import SiteInfoEditModal from '@/pages/Site/SiteMaintain/components/SiteInfoEditModal';
+import { useState } from 'react';
 
 const SiteMaintainIndex = () => {
   const dataSource = [];
@@ -16,12 +18,22 @@ const SiteMaintainIndex = () => {
     });
   }
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentSite, setCurrentSite] = useState<any>({});
+
   return (
     <div className="p-4">
       <div className={'flex justify-between items-center my-3 '}>
         <div className={'font-bold text-xl'}>站点维护</div>
         <div>
-          <Button type={'primary'} icon={<PlusOutlined />}>
+          <Button
+            type={'primary'}
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setCurrentSite({});
+              setModalVisible(true);
+            }}
+          >
             新增站点
           </Button>
         </div>
@@ -30,13 +42,31 @@ const SiteMaintainIndex = () => {
         {dataSource.map((item, index) => {
           return (
             <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8} key={index}>
-              <div className={'w-full'}>
+              <div
+                className={'w-full'}
+                onClick={() => {
+                  setCurrentSite(item);
+                  setModalVisible(true);
+                }}
+              >
                 <SiteInfoCard />
               </div>
             </Col>
           );
         })}
       </Row>
+      <SiteInfoEditModal
+        open={modalVisible}
+        currentSite={currentSite}
+        onCancel={() => {
+          setModalVisible(false);
+          setCurrentSite({});
+        }}
+        onOk={() => {
+          setModalVisible(false);
+          setCurrentSite({});
+        }}
+      />
     </div>
   );
 };

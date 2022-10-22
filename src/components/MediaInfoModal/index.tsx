@@ -1,5 +1,5 @@
 import { Badge, Modal } from 'antd';
-import { MediaInfo } from '@/models/mediaInfoModal';
+import { MediaInfo } from '@/models/media-info-modal';
 import React from 'react';
 
 type MediaInfoModalProps = {
