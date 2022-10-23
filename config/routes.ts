@@ -142,7 +142,7 @@ export default [
     path: '/service',
     name: '服务',
     icon: 'AppstoreOutlined',
-    component: './Blank/Blank',
+    component: './Service/ServiceIndex',
   },
   {
     // 设置
