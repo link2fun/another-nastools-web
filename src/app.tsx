@@ -21,12 +21,12 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
-  const fetchUserInfo = async () => {
+  const fetchUserInfo: () => Promise<any> = async () => {
     try {
-      const msg = await queryCurrentUser({
+      const data = await queryCurrentUser({
         skipErrorHandler: true,
       });
-      return msg.data;
+      return data;
     } catch (error) {
       history.push(loginPath);
     }

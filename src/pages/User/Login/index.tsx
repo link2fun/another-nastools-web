@@ -1,15 +1,8 @@
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
-import {
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
-import { history,  useModel } from '@umijs/max';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { history, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import styles from './index.less';
@@ -34,7 +27,6 @@ const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
-
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -48,8 +40,14 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.LoginParams) => {
     try {
       // 登录
-      const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
+      const loginResult: any = await login({ ...values, type });
+      const { apiKey, code, token, userinfo } = loginResult;
+      if (0 === code) {
+        // 直接把 token 存到 localStorage 中
+        localStorage.setItem('token', token);
+        localStorage.setItem('userinfo', JSON.stringify(userinfo));
+        localStorage.setItem('apiKey', apiKey);
+
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -57,9 +55,10 @@ const Login: React.FC = () => {
         history.push(urlParams.get('redirect') || '/');
         return;
       }
-      console.log(msg);
+      console.log(loginResult.mesage);
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      // @ts-ignore
+      setUserLoginState('msg');
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       console.log(error);
@@ -70,16 +69,14 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
-
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src="/logo.png" />}
           title="NasTool"
-          subTitle={"NAS媒体库资源归集、整理自动化工具"}
+          subTitle={'NAS媒体库资源归集、整理自动化工具'}
           initialValues={{
             autoLogin: true,
           }}
-
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
@@ -101,9 +98,7 @@ const Login: React.FC = () => {
           />
 
           {status === 'error' && loginType === 'account' && (
-            <LoginMessage
-              content={'账户或密码错误(admin/ant.design)'}
-            />
+            <LoginMessage content={'账户或密码错误(admin/ant.design)'} />
           )}
           {type === 'account' && (
             <>
@@ -151,8 +146,8 @@ const Login: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: "请输入秘钥！",
-                  }
+                    message: '请输入秘钥！',
+                  },
                 ]}
               />
             </>
