@@ -10,6 +10,8 @@ type MediaInfoCardProps = {
   mediaImgUrl: string;
   /** 媒体标题 */
   mediaTitle: string;
+  /** 媒体简介 */
+  mediaOverview: string;
 };
 
 const MediaInfoCard: React.FC<MediaInfoCardProps> = ({

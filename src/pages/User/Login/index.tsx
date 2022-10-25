@@ -41,9 +41,10 @@ const Login: React.FC = () => {
     try {
       // 登录
       const loginResult: any = await login({ ...values, type });
-      const { apiKey, code, token, userinfo } = loginResult;
-      if (0 === code) {
+      const { success, data } = loginResult;
+      if (success) {
         // 直接把 token 存到 localStorage 中
+        const { token, userinfo, apiKey } = data;
         localStorage.setItem('token', token);
         localStorage.setItem('userinfo', JSON.stringify(userinfo));
         localStorage.setItem('apiKey', apiKey);

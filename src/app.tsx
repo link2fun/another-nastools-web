@@ -26,7 +26,7 @@ export async function getInitialState(): Promise<{
       const data = await queryCurrentUser({
         skipErrorHandler: true,
       });
-      return data;
+      return data.data;
     } catch (error) {
       history.push(loginPath);
     }
@@ -52,7 +52,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   return {
     rightContentRender: () => <RightContent />,
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      content: initialState?.currentUser?.username,
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
