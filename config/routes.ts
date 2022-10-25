@@ -40,24 +40,59 @@ export default [
     icon: 'HeartOutlined',
     routes: [
       {
-        path: '/recommend/tmdb_hot_movie',
+        path: '/recommend/hm',
         name: 'TMDB热门电影',
         component: './Recommend/RecommendIndex',
       },
       {
-        path: '/recommend/tmdb_hot_tv',
+        path: '/recommend/ht',
         name: 'TMDB热门电视剧',
-        component: './Blank/Blank',
+        component: './Recommend/RecommendIndex',
       },
       {
-        path: '/recommend/tmdb_latest_movie',
+        path: '/recommend/nm',
         name: 'TMDB最新电影',
-        component: './Blank/Blank',
+        component: './Recommend/RecommendIndex',
       },
       {
-        path: '/recommend/tmdb_latest_tv',
+        path: '/recommend/nt',
         name: 'TMDB最新电视剧',
-        component: './Blank/Blank',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbom',
+        name: '豆瓣正在上映',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbhm',
+        name: '豆瓣热门电影',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbht',
+        name: '豆瓣热门电视剧',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbdh',
+        name: '豆瓣热门动画',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbnm',
+        name: '豆瓣最新电影',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbtop',
+        name: '豆瓣TOP250电影',
+        component: './Recommend/RecommendIndex',
+      },
+      {
+        path: '/recommend/dbzy',
+        name: '豆瓣热门综艺',
+        component: './Recommend/RecommendIndex',
       },
     ],
   },

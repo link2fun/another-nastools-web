@@ -4,7 +4,7 @@ import { useModel } from '@umijs/max';
 import { postForm } from '@/utils/request';
 import { useEffect, useRef, useState } from 'react';
 import { useInViewport, useThrottleFn } from 'ahooks';
-import { useLatest } from '@ant-design/pro-components';
+import { PageContainer, useLatest } from '@ant-design/pro-components';
 
 type RecommendItem = {
   id: number;
@@ -25,6 +25,10 @@ const RecommendIndex = () => {
   const { visible, mediaInfo, showMediaInfoModal, hideMediaInfoModal } =
     useModel('media-info-modal');
 
+  const pathname = window.location.pathname;
+  // split pathname to get the type of media
+  const type = pathname.split('/')[2];
+
   const [page, setPage] = useState(1);
   const latestPageRef = useLatest(page);
 
@@ -38,7 +42,7 @@ const RecommendIndex = () => {
     }
     setLoading(true);
     const data = await postForm('/api/v1/recommend/list', {
-      type: 'hm',
+      type: type,
       page: latestPageRef.current,
     });
     setDataSource([...dataSource, ...data.data.Items]);
@@ -61,9 +65,7 @@ const RecommendIndex = () => {
   }, [inViewport]);
 
   return (
-    <div className={'p-4'}>
-      <div className={'font-bold text-2xl mb-2'}>正在热映</div>
-
+    <PageContainer breadcrumbRender={false} waterMarkProps={{ content: '' }}>
       <div className={'container px-2 py-4 mx-auto flex flex-wrap '}>
         {dataSource.map((item) => {
           return (
@@ -95,7 +97,7 @@ const RecommendIndex = () => {
       </div>
       <MediaInfoModal visible={visible} mediaInfo={mediaInfo} handleClose={hideMediaInfoModal} />
       <div ref={ref} className={'loadMore'}></div>
-    </div>
+    </PageContainer>
   );
 };
 

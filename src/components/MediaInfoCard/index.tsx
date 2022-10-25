@@ -27,7 +27,7 @@ const MediaInfoCard: React.FC<MediaInfoCardProps> = ({
       <div className="group rounded-lg shadow-lg bg-white max-w-sm relative shadow hover:shadow-2xl transform hover:-translate-y-0.5">
         <Badge.Ribbon color={badgeColor} text={mediaScore}>
           <a href="#!">
-            <img className="rounded-t-lg" src={mediaImgUrl} alt="" />
+            <img className="rounded-t-lg" src={mediaImgUrl} alt="" referrerPolicy={'no-referrer'} />
           </a>
         </Badge.Ribbon>
         <div className="p-3">
