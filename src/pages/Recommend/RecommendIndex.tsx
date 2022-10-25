@@ -75,7 +75,7 @@ const RecommendIndex = () => {
               onClick={() => {
                 showMediaInfoModal({
                   title: item.title,
-                  type: '电影',
+                  type: '',
                   releaseDate: item.date,
                   mainImgUrl: item.image,
                   tmdbId: '',
@@ -85,7 +85,7 @@ const RecommendIndex = () => {
               }}
             >
               <MediaInfoCard
-                mediaType={'电影'}
+                mediaType={''}
                 mediaScore={item.vote}
                 mediaImgUrl={item.image}
                 mediaTitle={item.title}
