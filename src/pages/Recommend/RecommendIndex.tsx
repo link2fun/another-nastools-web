@@ -2,7 +2,9 @@ import MediaInfoCard from '@/components/MediaInfoCard';
 import MediaInfoModal from '@/components/MediaInfoModal';
 import { useModel } from '@umijs/max';
 import { postForm } from '@/utils/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useInViewport, useThrottleFn } from 'ahooks';
+import { useLatest } from '@ant-design/pro-components';
 
 type RecommendItem = {
   id: number;
@@ -23,14 +25,40 @@ const RecommendIndex = () => {
   const { visible, mediaInfo, showMediaInfoModal, hideMediaInfoModal } =
     useModel('media-info-modal');
 
+  const [page, setPage] = useState(1);
+  const latestPageRef = useLatest(page);
+
+  // loading state
+  const [loading, setLoading] = useState(false);
+  const latestLoadingRef = useLatest(loading);
+
   const loadRecommend = async () => {
-    const data = await postForm('/api/v1/recommend/list', { type: 'hm', page: 1 });
-    console.log(data);
+    if (latestLoadingRef.current) {
+      return;
+    }
+    setLoading(true);
+    const data = await postForm('/api/v1/recommend/list', {
+      type: 'hm',
+      page: latestPageRef.current,
+    });
     setDataSource([...dataSource, ...data.data.Items]);
+    setPage(latestPageRef.current + 1);
+    setLoading(false);
   };
+
+  const ref = useRef(null);
+  const [inViewport] = useInViewport(ref);
+
+  const { run } = useThrottleFn(
+    async () => {
+      await loadRecommend();
+    },
+    { wait: 1000 },
+  );
+
   useEffect(() => {
-    loadRecommend();
-  }, []);
+    run();
+  }, [inViewport]);
 
   return (
     <div className={'p-4'}>
@@ -66,6 +94,7 @@ const RecommendIndex = () => {
         })}
       </div>
       <MediaInfoModal visible={visible} mediaInfo={mediaInfo} handleClose={hideMediaInfoModal} />
+      <div ref={ref} className={'loadMore'}></div>
     </div>
   );
 };
