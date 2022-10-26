@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import ServiceNameTest from '@/pages/Service/components/ServiceNameTest';
+import NetworkTest from '@/pages/Service/components/NetworkTest';
 const ServiceIndex = () => {
   return (
     <div className="p-4">
@@ -12,22 +13,7 @@ const ServiceIndex = () => {
           <ServiceNameTest />
         </Col>
         <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
-        </Col>
-        <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
-        </Col>
-        <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
-        </Col>
-        <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
-        </Col>
-        <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
-        </Col>
-        <Col span={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-          <ServiceNameTest />
+          <NetworkTest />
         </Col>
       </Row>
     </div>
