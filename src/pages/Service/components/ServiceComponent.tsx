@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ServiceComponentProps = {
+export type ServiceComponentProps = {
   /** 图标 */
   icon: React.ReactNode;
   /** 图标背景色 */
