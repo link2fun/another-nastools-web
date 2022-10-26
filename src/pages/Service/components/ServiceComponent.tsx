@@ -27,7 +27,9 @@ const ServiceComponent: React.FC<ServiceComponentProps> = ({
       }
       onClick={onClick}
     >
-      <div className={`p-1 bg-[${iconBgColor}] rounded`}>{icon}</div>
+      <div className={`p-1 rounded`} style={{ backgroundColor: iconBgColor }}>
+        {icon}
+      </div>
       <div className={'flex flex-col ml-2'}>
         <div className={'text-lg text-blue-500 group-hover:underline group-hover:cursor-pointer'}>
           {title}

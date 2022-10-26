@@ -5,4 +5,10 @@ module.exports = {
     page: true,
     REACT_APP_ENV: true,
   },
+  env: {
+    node: true,
+    browser: true,
+    commonjs: true,
+    amd: true,
+  },
 };
