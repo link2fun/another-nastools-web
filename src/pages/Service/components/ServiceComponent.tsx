@@ -30,7 +30,7 @@ const ServiceComponent: React.FC<ServiceComponentProps> = ({
       <div className={`p-1 rounded`} style={{ backgroundColor: iconBgColor }}>
         {icon}
       </div>
-      <div className={'flex flex-col ml-2'}>
+      <div className={'flex flex-col ml-4'}>
         <div className={'text-lg text-blue-500 group-hover:underline group-hover:cursor-pointer'}>
           {title}
         </div>

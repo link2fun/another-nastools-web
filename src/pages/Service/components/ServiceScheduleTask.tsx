@@ -78,7 +78,7 @@ const ScheduleTaskList: ScheduleTask[] = [
     taskId: 'douban',
     taskName: '豆瓣想看',
     confirmText: '是否立即运行 豆瓣想看 ?',
-    color: '#2fb344',
+    color: '#d6336c',
     icon: <IconBookmarks size={40} color={'white'} stroke={2} strokeLinejoin="round" />,
   },
   // blacklist 清理转移缓存
@@ -119,6 +119,7 @@ const ServiceScheduleTask: React.FC<ServiceScheduleTaskProps> = ({ taskId = '' }
       title: task.taskName,
       icon: <ExclamationCircleOutlined />,
       content: task.confirmText,
+      centered: true,
       onOk() {
         return postForm('/api/v1/service/run', { item: task.taskId }).then((resp: any) => {
           const { success, message: _message } = resp;
