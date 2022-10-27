@@ -2,6 +2,7 @@ import ServiceNameTest from '@/pages/Service/components/ServiceNameTest';
 import NetworkTest from '@/pages/Service/components/NetworkTest';
 import { PageContainer } from '@ant-design/pro-components';
 import ServiceScheduleTask from '@/pages/Service/components/ServiceScheduleTask';
+import ServiceRuleTest from '@/pages/Service/components/ServiceRuleTest';
 
 const ServiceIndex = () => {
   return (
@@ -36,6 +37,9 @@ const ServiceIndex = () => {
         </div>
         <div className={'w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2'}>
           <ServiceNameTest />
+        </div>
+        <div className={'w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2'}>
+          <ServiceRuleTest />
         </div>
         <div className={'w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2'}>
           <NetworkTest />
