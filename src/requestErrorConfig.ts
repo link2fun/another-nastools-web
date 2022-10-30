@@ -30,12 +30,12 @@ export const errorConfig: RequestConfig = {
   errorConfig: {
     // 错误抛出
     errorThrower: (res) => {
-      const { success, data, errorCode, errorMessage, showType } =
-        res as unknown as ResponseStructure;
+      const { success, data, errorCode, errorMessage, showType, code } =
+        res as unknown as ResponseStructure & { code: number };
       if (!success) {
         const error: any = new Error(errorMessage);
         error.name = 'BizError';
-        error.info = { errorCode, errorMessage, showType, data };
+        error.info = { errorCode, errorMessage, showType, data, code };
         throw error; // 抛出自制的错误
       }
     },

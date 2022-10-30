@@ -121,14 +121,11 @@ const ServiceScheduleTask: React.FC<ServiceScheduleTaskProps> = ({ taskId = '' }
       content: task.confirmText,
       centered: true,
       onOk() {
-        return postForm('/api/v1/service/run', { item: task.taskId }).then((resp: any) => {
-          const { success, message: _message } = resp;
-          if (success) {
+        return postForm('/api/v1/service/run', { item: task.taskId }).then(
+          ({ message: _message }) => {
             return message.success(_message, 1);
-          }
-          message.error(_message).then();
-          return Promise.reject(_message);
-        });
+          },
+        );
       },
     });
   };

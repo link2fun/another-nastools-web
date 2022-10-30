@@ -2,7 +2,6 @@ import { IconAdjustmentsHorizontal } from '@tabler/icons';
 import ServiceComponent from '@/pages/Service/components/ServiceComponent';
 import { ProFormDigit, ProFormInstance, ProFormTextArea } from '@ant-design/pro-components';
 import { ModalForm } from '@ant-design/pro-components';
-import { message } from 'antd';
 import { useRef, useState } from 'react';
 import { postForm } from '@/utils/request';
 
@@ -47,13 +46,7 @@ const ServiceRuleTest = () => {
         submitter={{ resetButtonProps: false }}
         onFinish={async (values) => {
           console.log(values);
-          const apiResult: any = await postForm('/api/v1/service/rule/test', values);
-          console.log(apiResult);
-          const { success, data, message: _message } = apiResult;
-          if (!success) {
-            message.error(_message);
-            return false;
-          }
+          const data: any = await postForm('/api/v1/service/rule/test', values);
           setResult(data);
           return false;
         }}
