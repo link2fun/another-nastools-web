@@ -1,11 +1,11 @@
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
 import { history, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import styles from './index.less';
+import ApiUser from '@/services/nastools/ApiUser';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -40,29 +40,27 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.LoginParams) => {
     try {
       // 登录
-      const loginResult: any = await login({ ...values, type });
-      const { success, data } = loginResult;
-      if (success) {
-        // 直接把 token 存到 localStorage 中
-        const { token, userinfo, apiKey } = data;
-        localStorage.setItem('token', token);
-        localStorage.setItem('userinfo', JSON.stringify(userinfo));
-        localStorage.setItem('apiKey', apiKey);
+      const { username, password } = values;
 
-        const defaultLoginSuccessMessage = '登录成功！';
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
-        const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
-        return;
-      }
-      console.log(loginResult.mesage);
-      // 如果失败去设置用户错误信息
-      // @ts-ignore
-      setUserLoginState('msg');
-    } catch (error) {
+      const data: any = await ApiUser.login(username || '', password || '');
+      // 直接把 token 存到 localStorage 中
+      const { token, userinfo, apiKey } = data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userinfo', JSON.stringify(userinfo));
+      localStorage.setItem('apiKey', apiKey);
+
+      const defaultLoginSuccessMessage = '登录成功！';
+      message.success(defaultLoginSuccessMessage);
+      await fetchUserInfo();
+      const urlParams = new URL(window.location.href).searchParams;
+      history.push(urlParams.get('redirect') || '/');
+    } catch (error: any) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       console.log(error);
+      setUserLoginState({
+        ...values,
+        status: 'error',
+      });
       message.error(defaultLoginFailureMessage);
     }
   };

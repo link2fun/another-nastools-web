@@ -184,12 +184,11 @@ export default [
     path: '/setting',
     name: '设置',
     icon: 'SettingOutlined',
-    component: './Blank/Blank',
     routes: [
       // 基础设置
       { path: '/setting/base', name: '基础设置', component: './Blank/Blank' },
       // 用户管理
-      { path: '/setting/user', name: '用户管理', component: './Blank/Blank' },
+      { path: '/setting/user', name: '用户管理', component: './Setting/User/SettingUserIndex' },
       // 媒体库
       { path: '/setting/media', name: '媒体库', component: './Blank/Blank' },
       // 目录同步

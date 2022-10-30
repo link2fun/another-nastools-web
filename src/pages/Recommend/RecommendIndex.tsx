@@ -45,7 +45,7 @@ const RecommendIndex = () => {
       type: type,
       page: latestPageRef.current,
     });
-    setDataSource([...dataSource, ...data.data.Items]);
+    setDataSource([...dataSource, ...data.Items]);
     setPage(latestPageRef.current + 1);
     setLoading(false);
   };

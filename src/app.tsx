@@ -7,7 +7,7 @@ import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import ApiUser from '@/services/nastools/ApiUser';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -23,10 +23,10 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo: () => Promise<any> = async () => {
     try {
-      const data = await queryCurrentUser({
+      const data = await ApiUser.currentUser({
         skipErrorHandler: true,
       });
-      return data.data;
+      return data;
     } catch (error) {
       history.push(loginPath);
     }

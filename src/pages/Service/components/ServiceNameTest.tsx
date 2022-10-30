@@ -71,15 +71,12 @@ const ServiceNameTest = () => {
         modalProps={{ onCancel: () => setOpen(false), maskClosable: false, okText: '识别' }}
         submitter={{ resetButtonProps: false, submitButtonProps: { title: 'hello' } }}
         onFinish={async (values) => {
-          console.log(values);
-          const apiResult: any = await postForm('/api/v1/service/name/test', values);
-          const { success, data, message: _message } = apiResult;
-          if (!success) {
-            message.error(_message);
-            return false;
+          try {
+            const { data: _mediaInfo } = await postForm('/api/v1/service/name/test', values);
+            setMediaInfo(_mediaInfo);
+          } catch (e: any) {
+            message.error('识别失败' + e?.message);
           }
-          const { data: _mediaInfo } = data;
-          setMediaInfo(_mediaInfo);
           return false;
         }}
       >
@@ -135,7 +132,7 @@ const ServiceNameTest = () => {
               {mediaInfo.part}
             </span>
           )}
-          {mediaInfo && mediaInfo.tmdbid && (
+          {mediaInfo && mediaInfo.tmdbid && mediaInfo.tmdbid !== 0 && (
             <span
               title={'TMDB ID'}
               className={'ml-2 badge-outline text-green-500 border-green-500'}

@@ -58,11 +58,12 @@ const ResourceSearchIndex = () => {
   const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
 
   useEffect(() => {
-    postForm('/api/v1/search/result', {}).then((resp) => {
-      const { data } = resp;
-      const { result } = data;
-      setSearchResult(result);
-    });
+    postForm('/api/v1/search/result', {})
+      .then((data: any) => {
+        const { result } = data;
+        setSearchResult(result);
+      })
+      .catch(() => {});
   }, []);
 
   return (

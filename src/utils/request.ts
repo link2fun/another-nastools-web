@@ -12,7 +12,33 @@ const postForm = (url: string, formData: any = {}, options: any = {}) => {
     },
     data: data,
     ...(options || {}),
+  }).then((res) => {
+    const { code, success, data: _data, message } = res as any;
+    if (code === 0 || success) {
+      return Promise.resolve({ ..._data });
+    }
+    return Promise.reject(message);
   });
 };
 
-export { postForm };
+/** POST json */
+const postJSON = (url: string, data: any = {}, options: any = {}) => {
+  const token = localStorage.getItem('token') || '';
+  return request(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+    data: data,
+    ...(options || {}),
+  }).then((res) => {
+    const { code, success, data: _data, message } = res as any;
+    if (code === 0 || success) {
+      return Promise.resolve({ ..._data });
+    }
+    return Promise.reject(message);
+  });
+};
+
+export { postForm, postJSON };

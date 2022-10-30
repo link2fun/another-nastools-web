@@ -1,26 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from '@umijs/max';
-import { postForm } from '@/utils/request';
-
-/** 获取当前的用户 GET /api/currentUser */
-export async function currentUser(options?: { [key: string]: any }) {
-  const userinfo_str = localStorage.getItem('userinfo') || '{}';
-  // parse to obj
-  const userinfo = JSON.parse(userinfo_str);
-
-  return postForm('/api/v1/user/info', { username: userinfo.username });
-}
-
-/** 退出登录接口 POST /api/login/outLogin */
-export async function outLogin(options?: { [key: string]: any }) {
-  return postForm('/api/v1/system/logout');
-}
-
-/** 登录接口 POST /api/v1/user/login */
-export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
-  return postForm('/api/v1/user/login', body);
-}
 
 /** 此处后端没有提供注释 GET /api/notices */
 export async function getNotices(options?: { [key: string]: any }) {
