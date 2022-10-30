@@ -15,7 +15,15 @@ const postForm = (url: string, formData: any = {}, options: any = {}) => {
   }).then((res) => {
     const { code, success, data: _data, message } = res as any;
     if (code === 0 || success) {
-      return Promise.resolve({ message, ..._data });
+      if (!!_data) {
+        // if _data is array, return _data directly
+        if (Array.isArray(_data)) {
+          return Promise.resolve(_data);
+        }
+
+        return Promise.resolve({ message, ..._data });
+      }
+      return Promise.resolve({ message });
     }
     return Promise.reject(message);
   });

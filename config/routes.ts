@@ -230,10 +230,9 @@ export default [
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    name: '组件示例',
+    path: '/component-demo',
+    component: './ComponentDemo/ComponentDemoIndex',
   },
   {
     path: '/',
