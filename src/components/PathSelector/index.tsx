@@ -1,11 +1,15 @@
 import { ProTable, useLatest } from '@ant-design/pro-components';
 import { Input, InputRef, Modal } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { postForm } from '@/utils/request';
 
-const PathSelector = () => {
-  const [selectedPath, setSelectedPath] = useState<string>('');
-  const selectPathLatest = useLatest(selectedPath);
+type PathSelectorProps = {
+  value?: string;
+  onChange?: (value: string) => void;
+};
+
+const PathSelector: React.FC<PathSelectorProps> = ({ value = '', onChange = () => {} }) => {
+  const selectPathLatest = useLatest(value);
   const [open, setOpen] = useState<boolean>(false);
   const selectorInput = useRef<InputRef>(null);
 
@@ -17,7 +21,7 @@ const PathSelector = () => {
       .then((data) => {
         console.log(data);
         // get upper dir
-        const upperLevelDir = selectedPath.substring(0, selectedPath.lastIndexOf('/')) || '/';
+        const upperLevelDir = value.substring(0, value.lastIndexOf('/')) || '/';
         if (upperLevelDir) {
           setDataSource([{ path: upperLevelDir, aliasPath: '返回上一级', type: 'dir' }, ...data]);
         } else {
@@ -25,7 +29,7 @@ const PathSelector = () => {
         }
       })
       .catch(() => {});
-  }, [selectedPath]);
+  }, [value]);
 
   return (
     <>
@@ -35,7 +39,7 @@ const PathSelector = () => {
           setOpen(true);
           selectorInput.current?.blur();
         }}
-        value={selectedPath}
+        value={value}
       />
 
       <Modal
@@ -81,7 +85,9 @@ const PathSelector = () => {
           onRow={(record) => {
             return {
               onClick: () => {
-                setSelectedPath(record.path);
+                if (onChange) {
+                  onChange(record.path);
+                }
               },
             };
           }}
