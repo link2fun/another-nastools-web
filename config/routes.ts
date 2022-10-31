@@ -190,7 +190,11 @@ export default [
       // 用户管理
       { path: '/setting/user', name: '用户管理', component: './Setting/User/SettingUserIndex' },
       // 媒体库
-      { path: '/setting/media', name: '媒体库', component: './Blank/Blank' },
+      {
+        path: '/setting/media',
+        name: '媒体库',
+        component: './Setting/Library/SettingLibraryIndex',
+      },
       // 目录同步
       { path: '/setting/sync', name: '目录同步', component: './Blank/Blank' },
       // 消息通知
