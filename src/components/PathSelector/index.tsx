@@ -1,5 +1,6 @@
 import { ProTable, useLatest } from '@ant-design/pro-components';
-import { Input, InputRef, Modal } from 'antd';
+import type { InputRef } from 'antd';
+import { Input, Modal } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { postForm } from '@/utils/request';
 
@@ -21,7 +22,7 @@ const PathSelector: React.FC<PathSelectorProps> = ({ value = '', onChange = () =
       .then((data) => {
         console.log(data);
         // get upper dir
-        const upperLevelDir = value.substring(0, value.lastIndexOf('/')) || '/';
+        const upperLevelDir = value.substring(0, value.lastIndexOf('/')) + '/' || '';
         if (upperLevelDir) {
           setDataSource([{ path: upperLevelDir, aliasPath: '返回上一级', type: 'dir' }, ...data]);
         } else {

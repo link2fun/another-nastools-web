@@ -70,6 +70,9 @@ const SettingLibraryIndex = () => {
             resetText: '取消',
           },
         }}
+        modalProps={{
+          onCancel: () => setOpen(false),
+        }}
         onFinish={async (values) => {
           console.log({ ...values, key: activeKey });
           await postForm('/api/v1/config/directory', {
