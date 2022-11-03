@@ -7,9 +7,13 @@ import { postForm } from '@/utils/request';
 type PathSelectorProps = {
   value?: string;
   onChange?: (value: string) => void;
+  allowClear?: boolean;
 };
 
-const PathSelector: React.FC<PathSelectorProps> = ({ value = '', onChange = () => {} }) => {
+const PathSelector: React.FC<PathSelectorProps> = (
+  { value = '', onChange = () => {} },
+  allowClear = true,
+) => {
   const selectPathLatest = useLatest(value);
   const [open, setOpen] = useState<boolean>(false);
   const selectorInput = useRef<InputRef>(null);
@@ -20,7 +24,6 @@ const PathSelector: React.FC<PathSelectorProps> = ({ value = '', onChange = () =
   useEffect(() => {
     postForm('/api/v1/system/path', { dir: selectPathLatest.current, filter: false })
       .then((data) => {
-        console.log(data);
         // get upper dir
         const upperLevelDir = value.substring(0, value.lastIndexOf('/')) + '/' || '';
         if (upperLevelDir) {
@@ -41,6 +44,7 @@ const PathSelector: React.FC<PathSelectorProps> = ({ value = '', onChange = () =
           selectorInput.current?.blur();
         }}
         value={value}
+        allowClear={allowClear}
       />
 
       <Modal

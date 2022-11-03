@@ -196,7 +196,11 @@ export default [
         component: './Setting/Library/SettingLibraryIndex',
       },
       // 目录同步
-      { path: '/setting/sync', name: '目录同步', component: './Blank/Blank' },
+      {
+        path: '/setting/directory_sync',
+        name: '目录同步',
+        component: './Setting/DirectorySync/SettingDirectorySyncIndex',
+      },
       // 消息通知
       { path: '/setting/message', name: '消息通知', component: './Blank/Blank' },
       // 过滤规则
