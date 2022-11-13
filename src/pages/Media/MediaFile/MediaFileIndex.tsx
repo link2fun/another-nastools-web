@@ -73,16 +73,21 @@ const MediaFileIndex = () => {
             return (
               <div
                 key={item.path}
-                className={
-                  'flex items-center p-1 my-3 border border-solid border-gray-400 rounded-lg'
-                }
+                className={`flex items-center p-1 my-3 border border-solid border-gray-250 rounded-lg transition-all hover:-translate-y-1
+                  hover:shadow-lg hover:border-gray-500 hover:bg-gray-100`}
               >
                 <div
                   className={
-                    'w-20 h-20 text-gray-600 text-center items-center mx-2 text-2xl align-middle '
+                    'text-gray-600 text-center items-center mx-2 text-2xl align-middle flex items-center w-20 h-20 p-1 '
                   }
                 >
-                  图标
+                  <div
+                    className={
+                      'bg-gray-300 text-lg font-bold w-full h-full flex items-center text-center rounded-lg'
+                    }
+                  >
+                    <span className={'w-full'}>{item?.ext || '目录'}</span>
+                  </div>
                 </div>
                 <div className={'w-full'}>
                   <div
