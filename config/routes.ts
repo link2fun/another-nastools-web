@@ -161,8 +161,9 @@ export default [
     path: '/media',
     name: '媒体整理',
     icon: 'FolderViewOutlined',
-    component: './Blank/Blank',
     routes: [
+      // 媒体文件
+      { path: '/media/file', name: '媒体文件', component: './Media/MediaFile/MediaFileIndex' },
       // 手动识别
       { path: '/media/manual', name: '手动识别', component: './Blank/Blank' },
       // 历史记录

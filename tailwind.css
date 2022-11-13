@@ -10,6 +10,10 @@
   .badge-outline {
     @apply px-1 rounded border border-solid
   }
+
+  .badge-action {
+    @apply cursor-pointer border border-gray-400 border-solid rounded-full  px-2 mx-1 hover:bg-gray-300
+  }
 }
 /* 修复一下和ant-design 的不兼容 */
 /* 1. 按钮透明 */
@@ -21,4 +25,13 @@ button.ant-btn-primary, [type='button'].ant-btn-primary, [type='reset'].ant-btn-
 .ant-btn .anticon > svg,
 .ant-btn .anticon > svg {
   vertical-align: baseline;
+}
+
+.anticon > svg {
+  vertical-align: baseline;
+}
+.ant-btn > svg{
+  vertical-align: center;
+  display: inline-block;
+  margin-right: 4px;
 }
