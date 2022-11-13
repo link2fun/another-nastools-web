@@ -1,20 +1,25 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { useEffect, useState } from 'react';
+import { useLocalStorageState } from 'ahooks';
 import { postForm } from '@/utils/request';
 import type { pathItem } from '@/components/PathSelector';
 import Utils from '@/utils/utils';
 import NameTestInfo from '@/components/NameTestInfo';
-import { message } from 'antd';
+import { message, Spin } from 'antd';
 
 const MediaFileIndex = () => {
   const [, onChange] = useState<string>('');
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [currentPath, setCurrentPath] = useState<string>('');
+  const [currentPath, setCurrentPath] = useLocalStorageState<string>('MEDIA_FILE_CURRENT_PATH', {
+    defaultValue: '',
+  });
 
   // dataSource
   const [dataSource, setDataSource] = useState<any[]>([]);
-  const [_upperLevel, setUpperLevel] = useState<any>({});
+  const [_upperLevel, setUpperLevel] = useLocalStorageState<any>('MEDIA_FILE_UPPER_LEVEL', {
+    defaultValue: '',
+  });
 
   const handlePathClick = (record: any) => {
     if (onChange) {
@@ -38,6 +43,7 @@ const MediaFileIndex = () => {
 
   /** 加载下级目录和文件 */
   const loadSubLevelPath = (path: string) => {
+    setLoading(true);
     return postForm('/api/v1/system/path', { dir: path, filter: 'ALL' })
       .then(({ data }: { data: pathItem[] }) => {
         const upperLevelDir = currentPath;
@@ -57,6 +63,7 @@ const MediaFileIndex = () => {
       return;
     }
     try {
+      setLoading(true);
       const { data: _mediaInfo } = await postForm('/api/v1/service/name/test', { name });
       console.log(_mediaInfo);
       // 把mediaInfo放到dataSource里, 使用path 匹配
@@ -69,6 +76,8 @@ const MediaFileIndex = () => {
       setDataSource(_dataSource);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,8 +87,8 @@ const MediaFileIndex = () => {
   }, [currentPath]);
 
   return (
-    <PageContainer breadcrumbRender={false} waterMarkProps={{ content: '' }} loading={loading}>
-      <div className={'mb-3 flex justify-between text-lg'}>
+    <PageContainer breadcrumbRender={false} waterMarkProps={{ content: '' }}>
+      <Spin spinning={loading} className={'mb-3 flex justify-between text-lg'}>
         <div>
           <div
             className={'cursor-pointer hover:underline transform transition-all hover:font-medium'}
@@ -92,7 +101,7 @@ const MediaFileIndex = () => {
           <div className={'ml-1'}>转移目录</div>
           <div className={'ml-1'}>硬链接查询</div>
         </div>
-      </div>
+      </Spin>
       <div>当前目录: {_upperLevel?.path}</div>
       <div>
         <div className={'scroll-auto h-auto'}>
