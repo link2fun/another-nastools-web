@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { postForm } from '@/utils/request';
 import type { pathItem } from '@/components/PathSelector';
 import Utils from '@/utils/utils';
+import NameTestInfo from '@/components/NameTestInfo';
+import { message } from 'antd';
 
 const MediaFileIndex = () => {
   const [, onChange] = useState<string>('');
@@ -20,13 +22,11 @@ const MediaFileIndex = () => {
     }
     if (record.type === 'upperLevel') {
       const upperLevel = Utils.getPrevPath(record.path);
-      console.log(upperLevel);
       if (upperLevel.endsWith('/')) {
         setCurrentPath(upperLevel);
       } else {
         setCurrentPath(upperLevel + '/');
       }
-      // onChange(record.path);
     } else {
       if (record.type === 'dir') {
         const upperLevel = record.path;
@@ -36,9 +36,9 @@ const MediaFileIndex = () => {
     }
   };
 
-  useEffect(() => {
-    setLoading(true);
-    postForm('/api/v1/system/path', { dir: currentPath, filter: 'ALL' })
+  /** 加载下级目录和文件 */
+  const loadSubLevelPath = (path: string) => {
+    return postForm('/api/v1/system/path', { dir: path, filter: 'ALL' })
       .then(({ data }: { data: pathItem[] }) => {
         const upperLevelDir = currentPath;
         setDataSource([...data]);
@@ -48,6 +48,33 @@ const MediaFileIndex = () => {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  };
+
+  /** 加载文件识别结果 */
+  const loadMediaInfo = async (path: string, name: string) => {
+    if (!name) {
+      message.error('当前目录不可识别');
+      return;
+    }
+    try {
+      const { data: _mediaInfo } = await postForm('/api/v1/service/name/test', { name });
+      console.log(_mediaInfo);
+      // 把mediaInfo放到dataSource里, 使用path 匹配
+      const _dataSource = dataSource.map((item) => {
+        if (item.path === path) {
+          item.mediaInfo = _mediaInfo;
+        }
+        return item;
+      });
+      setDataSource(_dataSource);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    loadSubLevelPath(currentPath).then(() => {});
   }, [currentPath]);
 
   return (
@@ -98,11 +125,20 @@ const MediaFileIndex = () => {
                   >
                     {item.name || item.path}
                   </div>
-                  <div></div>
+                  {item.mediaInfo && (
+                    <div className={'mb-2'}>
+                      <NameTestInfo mediaInfo={item.mediaInfo || {}} />
+                    </div>
+                  )}
                   <div className={'flex justify-between w-full flex-col md:flex-row'}>
                     <div>{item.size}</div>
                     <div className={'flex '}>
-                      <div className={'badge-action'}>识别</div>
+                      <div
+                        className={'badge-action'}
+                        onClick={() => loadMediaInfo(item.path, item.name)}
+                      >
+                        识别
+                      </div>
                       <div className={'badge-action'}>转移</div>
                       <div className={'badge-action'}>下载字幕</div>
                       <div className={'badge-action'}>硬链接查询</div>
