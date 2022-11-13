@@ -57,28 +57,25 @@ const MediaFileIndex = () => {
   };
 
   /** 加载文件识别结果 */
-  const loadMediaInfo = async (path: string, name: string) => {
+  const loadMediaInfo = (path: string, name: string) => {
     if (!name) {
-      message.error('当前目录不可识别');
-      return;
+      return message.error('当前目录不可识别');
     }
-    try {
-      setLoading(true);
-      const { data: _mediaInfo } = await postForm('/api/v1/service/name/test', { name });
-      console.log(_mediaInfo);
-      // 把mediaInfo放到dataSource里, 使用path 匹配
-      const _dataSource = dataSource.map((item) => {
-        if (item.path === path) {
-          item.mediaInfo = _mediaInfo;
-        }
-        return item;
-      });
-      setDataSource(_dataSource);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+
+    return postForm('/api/v1/service/name/test', { name })
+      .then(({ data: _mediaInfo }) => {
+        const _dataSource = dataSource.map((item) => {
+          if (item.path === path) {
+            item.mediaInfo = _mediaInfo;
+          }
+          return item;
+        });
+        setDataSource(_dataSource);
+        return Promise.resolve();
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -88,7 +85,12 @@ const MediaFileIndex = () => {
 
   return (
     <PageContainer breadcrumbRender={false} waterMarkProps={{ content: '' }}>
-      <Spin spinning={loading} className={'mb-3 flex justify-between text-lg'}>
+      <Spin
+        spinning={loading}
+        size={'large'}
+        wrapperClassName={'bg-grey-400 w-full h-full'}
+        className={'mb-3 flex justify-between text-lg w-full h-full'}
+      >
         <div>
           <div
             className={'cursor-pointer hover:underline transform transition-all hover:font-medium'}
