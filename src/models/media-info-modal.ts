@@ -12,7 +12,7 @@ export type MediaInfo = {
   mainImgUrl: string;
 
   /** TMDB ID */
-  tmdbId: string;
+  tmdbid: string;
   /** 豆瓣 ID */
   doubanId: string;
 };
@@ -25,7 +25,7 @@ export default () => {
     title: '',
     type: '',
     releaseDate: '',
-    tmdbId: '',
+    tmdbid: '',
     doubanId: '',
   });
 
