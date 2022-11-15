@@ -30,12 +30,19 @@ export const errorConfig: RequestConfig = {
   errorConfig: {
     // 错误抛出
     errorThrower: (res) => {
-      const { success, data, errorCode, errorMessage, showType, code } =
-        res as unknown as ResponseStructure & { code: number };
+      const {
+        success,
+        data,
+        errorCode,
+        errorMessage,
+        message: _message,
+        showType,
+        code,
+      } = res as unknown as ResponseStructure & { code: number; message: string };
       if (!success) {
         const error: any = new Error(errorMessage);
         error.name = 'BizError';
-        error.info = { errorCode, errorMessage, showType, data, code };
+        error.info = { errorCode, errorMessage: errorMessage || _message, showType, data, code };
         throw error; // 抛出自制的错误
       }
     },
@@ -67,7 +74,7 @@ export const errorConfig: RequestConfig = {
               // TODO: redirect
               break;
             default:
-              message.error(errorMessage);
+              notification.error({ message: errorMessage });
           }
         }
       } else if (error.response) {
@@ -98,11 +105,11 @@ export const errorConfig: RequestConfig = {
   responseInterceptors: [
     (response) => {
       // 拦截响应数据，进行个性化处理
-      const { data } = response as unknown as ResponseStructure;
+      // const { data } = response as unknown as ResponseStructure;
 
-      if (data?.success === false) {
-        message.error(data?.message || '请求失败！');
-      }
+      // if (data?.success === false) {
+      //   message.error(data?.message || '请求失败！');
+      // }
       return response;
     },
   ],

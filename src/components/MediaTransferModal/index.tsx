@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { message, Modal } from 'antd';
+import { Button, message, Modal } from 'antd';
 import {
   ProFormDigit,
   ProFormGroup,
@@ -8,7 +8,7 @@ import {
   ProFormSelect,
 } from '@ant-design/pro-components';
 import { ProForm, ProFormText } from '@ant-design/pro-components';
-import { TransferInfo } from '@/hooks/useMediaTransferModal';
+import { TransferInfo, TransferRequest } from '@/hooks/useMediaTransferModal';
 import { NameTestResult } from '@/pages/Service/components/ServiceNameTest';
 
 type MediaTransferModalProps = {
@@ -16,6 +16,7 @@ type MediaTransferModalProps = {
   nameTestResult: Partial<NameTestResult>;
   visible: boolean;
   handleClose: () => void;
+  startTransfer: (transferRequest: TransferRequest) => Promise<void>;
 };
 
 const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
@@ -23,6 +24,7 @@ const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
   transferInfo,
   nameTestResult,
   handleClose = () => {},
+  startTransfer,
 }) => {
   const formRef = useRef<ProFormInstance>();
   const [formData, setFormData] = useState<any>({});
@@ -36,11 +38,14 @@ const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
       const _data = {
         path: transferInfo?.fromPath,
         inpath: transferInfo?.fromPath,
+        outpath: '',
+        syncmod: 'link',
         type: nameTestResult.type,
-        tmdb: nameTestResult.tmdbid,
+        tmdb: '' + nameTestResult.tmdbid,
         season,
       };
       console.log(transferInfo, nameTestResult, _data);
+      setFormData(_data);
       formRef.current?.setFieldsValue(_data);
     }
   }, [nameTestResult]);
@@ -50,6 +55,11 @@ const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
       formRef.current?.resetFields();
     }
   }, [visible]);
+
+  const processTransfer = () => {
+    startTransfer(formData).then(() => {});
+    return false;
+  };
 
   return (
     <Modal
@@ -69,7 +79,17 @@ const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
         onValuesChange={(values) => setFormData(values)}
         submitter={{
           render: () => {
-            return [];
+            return [
+              <div className={'flex justify-between'}>
+                <Button key={'cancel'} onClick={handleClose}>
+                  取消
+                </Button>
+                ,
+                <Button key={'confirm'} type={'primary'} onClick={processTransfer}>
+                  转移
+                </Button>
+              </div>,
+            ];
           },
         }}
         layout={'vertical'}
@@ -80,7 +100,12 @@ const MediaTransferModal: React.FC<MediaTransferModalProps> = ({
           return true;
         }}
       >
-        <ProFormText name="inpath" label="输入路径" placeholder="inpath" />
+        <ProFormText
+          name="inpath"
+          label="输入路径"
+          placeholder="inpath"
+          proFieldProps={{ mode: 'read' }}
+        />
         <ProFormText name="outpath" label="输出路径" placeholder="outpath" />
         <ProFormGroup>
           <ProFormSelect

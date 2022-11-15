@@ -13,8 +13,14 @@ const MediaFileIndex = () => {
   const [, onChange] = useState<string>('');
 
   // 要操作的媒体信息
-  const { open, transferInfo, nameTestResult, openMediaTransferModal, closeMediaTransferModal } =
-    useMediaTransferModal();
+  const {
+    open,
+    transferInfo,
+    nameTestResult,
+    openMediaTransferModal,
+    closeMediaTransferModal,
+    startTransfer,
+  } = useMediaTransferModal();
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPath, setCurrentPath] = useLocalStorageState<string>('MEDIA_FILE_CURRENT_PATH', {
     defaultValue: '',
@@ -148,7 +154,7 @@ const MediaFileIndex = () => {
                     )}
                     <div className={'flex justify-between w-full flex-col md:flex-row'}>
                       <div>{item.size}</div>
-                      <div className={'flex '}>
+                      <div className={'flex flex-wrap '}>
                         <div
                           className={'badge-action'}
                           onClick={() => loadMediaInfo(item.path, item.name)}
@@ -187,6 +193,7 @@ const MediaFileIndex = () => {
         transferInfo={transferInfo}
         visible={open}
         handleClose={() => closeMediaTransferModal()}
+        startTransfer={startTransfer}
       />
     </PageContainer>
   );

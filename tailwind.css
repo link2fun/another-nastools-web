@@ -12,7 +12,7 @@
   }
 
   .badge-action {
-    @apply cursor-pointer border border-gray-400 border-solid rounded-full  px-2 mx-1 hover:bg-gray-300
+    @apply cursor-pointer border border-gray-400 border-solid rounded-full  px-2 mx-1 mb-2 hover:bg-gray-300
   }
 }
 /* 修复一下和ant-design 的不兼容 */
