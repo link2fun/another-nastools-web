@@ -1,57 +1,25 @@
-# Ant Design Pro
+# Another NasTool web UI
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+本项目使用 [Ant Design Pro](https://pro.ant.design).
 
-## Environment Prepare
+> 当前处于开发阶段，不建议用于生产环境
 
-Install `node_modules`:
+## 环境配置
 
-```bash
+修改 `config/proxy.ts` 里面的后端地址, 可以指定不同环境的后端地址
+
+## 环境准备
+
+```shell
+
 npm install
+
+# 启动本地环境
+npm run start:dev
+
+# 启动测试环境
+npm run start:test
+
 ```
 
-or
-
-```bash
-yarn
-```
-
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
-
-### Start project
-
-```bash
-npm start
-```
-
-### Build project
-
-```bash
-npm run build
-```
-
-### Check code style
-
-```bash
-npm run lint
-```
-
-You can also use script to auto fix some lint error:
-
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+enjoy it!
