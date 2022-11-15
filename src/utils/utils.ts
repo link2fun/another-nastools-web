@@ -16,6 +16,9 @@ const Utils = {
     }
     // 如果不是 windows 路径, 则是 linux 路径
     const pathArr = path.split('/');
+    if (pathArr[pathArr.length - 1] === '') {
+      pathArr.pop();
+    }
     pathArr.pop();
     return pathArr.join('/');
   },
